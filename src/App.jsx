@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import MasterBrain from './components/MasterBrain';
 import MasterBrainLive from './components/MasterBrainLive';
 import UserApp from './components/UserApp';
+import AnimatedBackground from './components/AnimatedBackground';
 import { generateAIResponses, generateGroqResponses } from './PromptEngine';
 
 function App() {
@@ -23,6 +24,12 @@ function App() {
       'Gate C': 20,
       'Main Stage': 10,
       'Food Court': 15
+    },
+    zoneDeltas: {
+      'Gate A': '',
+      'Gate C': '',
+      'Main Stage': '',
+      'Food Court': ''
     }
   });
 
@@ -37,13 +44,22 @@ function App() {
     const interval = setInterval(() => {
       setContext(prev => {
         const newZones = { ...prev.zones };
+        const newDeltas = { ...prev.zoneDeltas };
         Object.keys(newZones).forEach(zone => {
-          const jitter = Math.floor(Math.random() * 5) - 2; 
-          newZones[zone] = Math.min(100, Math.max(0, newZones[zone] + jitter));
+          const jitter = Math.floor(Math.random() * 3) - 1; // -1, 0, 1
+          const newVal = Math.min(100, Math.max(0, newZones[zone] + jitter));
+          newDeltas[zone] = newVal > newZones[zone] ? 'tick-up' : (newVal < newZones[zone] ? 'tick-down' : '');
+          newZones[zone] = newVal;
         });
-        return { ...prev, zones: newZones };
+        
+        // Reset deltas shortly after to allow CSS re-trigger
+        setTimeout(() => {
+          setContext(p => ({ ...p, zoneDeltas: { 'Gate A': '', 'Gate C': '', 'Main Stage': '', 'Food Court': '' }}));
+        }, 500);
+
+        return { ...prev, zones: newZones, zoneDeltas: newDeltas };
       });
-    }, 3000);
+    }, 1500);
     return () => clearInterval(interval);
   }, []);
 
@@ -154,6 +170,9 @@ function App() {
   return (
     <div className={theme === 'light' ? 'light-mode' : ''} style={{display:'flex', flexDirection:'column', height:'100vh', width:'100vw', position:'relative', transition:'background 0.3s, color 0.3s'}}>
       
+      {/* Animated Background */}
+      <AnimatedBackground />
+
       {/* Global Flashing Overlay */}
       {showCriticalOverlay && (
         <div className="global-alert-overlay">
@@ -163,7 +182,7 @@ function App() {
       )}
 
       {/* Top Level Nav */}
-      <div style={{background:'var(--header-bg)', padding:'1rem 2rem', display:'flex', gap:'2rem', borderBottom:'1px solid var(--bg-panel-border)', alignItems:'center', transition:'all 0.3s'}}>
+      <div style={{background:'var(--header-bg)', padding:'1rem 2rem', display:'flex', gap:'2rem', borderBottom:'1px solid var(--bg-panel-border)', alignItems:'center', transition:'all 0.3s', flexWrap: 'wrap'}}>
         
         {/* Theme Toggle */}
         <div style={{display:'flex', alignItems:'center', gap:'0.5rem', marginRight:'1rem'}}>
@@ -214,12 +233,16 @@ function App() {
           />
         )}
 
-        {/* RIGHT: The User's Phone is persistent */}
-        <UserApp 
-          context={context}
-          aiData={aiData} 
-          updateContext={updateContext}
-        />
+        {/* RIGHT: The User's Phone (Hidden in Live Mode) */}
+        {currentView === 'demo' && (
+          <div className="user-app-container">
+            <UserApp 
+              context={context}
+              aiData={aiData} 
+              updateContext={updateContext}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

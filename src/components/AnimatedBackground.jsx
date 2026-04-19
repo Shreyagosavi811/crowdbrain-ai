@@ -1,0 +1,17 @@
+import React from 'react';
+
+const AnimatedBackground = () => {
+  return (
+    <div className="animated-bg">
+      <div className="orb orb-1"></div>
+      <div className="orb orb-2"></div>
+      <div className="orb orb-3"></div>
+      <div className="orb orb-4"></div>
+      
+      {/* Subtle circuit/grid overlay */}
+      <div className="bg-grid"></div>
+    </div>
+  );
+};
+
+export default AnimatedBackground;

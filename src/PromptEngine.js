@@ -109,9 +109,9 @@ export const generateGroqResponses = async (context) => {
     const prompt = `
       You are an AI managing an Indian event (${context.scenario}).
       Context: User Persona: ${context.persona}, User Location: ${context.userLocation}, Phase: ${context.phase}, High congested zone: ${JSON.stringify(context.zones)}.
-      Generate a JSON response exactly matching this structure (limit suggestions to 1 sentence each, be natural):
+      Generate a JSON response exactly matching this structure (limit suggestions to 1 actionable sentence, make reasoning a short punchy sentence starting with 'Because...', be professional):
       {
-        "mainSuggestion": "String",
+        "mainSuggestion": "String (Clear recommendation)",
         "reasoning": "String starting with 'Because...'",
         "prediction": "String",
         "timing": "String",

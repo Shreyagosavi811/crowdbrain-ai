@@ -1,5 +1,6 @@
 import React from 'react';
 import { Activity, Play, Settings, Bell, Zap, Route } from 'lucide-react';
+import Logo from './Logo';
 
 const MasterBrain = ({ context, updateContext, runScenario, aiData }) => {
   const { aiEnabled, phase, scenario, zones } = context;
@@ -11,11 +12,12 @@ const MasterBrain = ({ context, updateContext, runScenario, aiData }) => {
   return (
     <div className="master-brain">
       <div className="glass-panel">
-        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-          <h1 className="gradient-text" style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
-            <Activity /> Crowd Brain - Master Panel
-          </h1>
-          <div style={{display:'flex', gap:'1rem', alignItems:'center'}}>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'1rem'}}>
+          <div style={{display:'flex', alignItems:'center', gap:'1rem', flexWrap:'wrap'}}>
+            <Logo />
+            <span style={{fontSize:'1.2rem', color:'var(--text-secondary)', borderLeft:'1px solid var(--bg-panel-border)', paddingLeft:'1rem'}}>Master Panel</span>
+          </div>
+          <div style={{display:'flex', gap:'1rem', alignItems:'center', flexWrap:'wrap'}}>
             <button 
               className={`glass-btn ${context.useGroq ? 'active' : ''}`}
               onClick={() => updateContext('useGroq', !context.useGroq)}
@@ -68,12 +70,16 @@ const MasterBrain = ({ context, updateContext, runScenario, aiData }) => {
           <p style={{fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'1rem'}}>Drag to simulate sudden surges</p>
           
           <div className="map-sandbox">
-            {Object.keys(zones).map(z => {
-              let levelClass = zones[z] < 40 ? 'low' : zones[z] < 75 ? 'medium' : 'high';
+            {Object.keys(context.zones).map((zone, i) => {
+              const val = context.zones[zone];
+              const deltaClass = context.zoneDeltas ? context.zoneDeltas[zone] : '';
+              let level = 'low';
+              if (val > 50) level = 'medium';
+              if (val > 80) level = 'high';
               return (
-                <div key={z} className={`map-zone ${levelClass}`}>
-                  <h3>{z}</h3>
-                  <span className="count">{zones[z]}%</span>
+                <div key={i} className={`map-zone ${level}`}>
+                  <h3>{zone}</h3>
+                  <span className={`count ${deltaClass}`}>{val}%</span>
                 </div>
               );
             })}

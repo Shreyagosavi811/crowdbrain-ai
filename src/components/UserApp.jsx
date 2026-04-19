@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, MapPin, Compass, ShieldAlert, Heart, Info, HandHeart, Settings, Route, ArrowRight } from 'lucide-react';
+import { User, MapPin, Compass, ShieldAlert, Heart, Info, HandHeart, Settings, Route, ArrowRight, QrCode } from 'lucide-react';
 import { askChatBot } from '../PromptEngine';
 
 const UserApp = ({ context, aiData, updateContext }) => {
@@ -9,8 +9,100 @@ const UserApp = ({ context, aiData, updateContext }) => {
   const [chatHistory, setChatHistory] = useState([]);
   const [isChatting, setIsChatting] = useState(false);
 
+  const [activeNotification, setActiveNotification] = useState(null);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const notifRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!context.aiEnabled) {
+      setActiveNotification(null);
+      notifRef.current = null;
+      return;
+    }
+
+    let rawNotif = null;
+    if (aiData?.safetyAlert) {
+      rawNotif = {
+        title: 'Safety Alert',
+        text: aiData.safetyAlert.text,
+        type: 'urgent',
+        icon: <ShieldAlert size={16}/>,
+        color: 'var(--accent-red)'
+      };
+    } else if (aiData?.notification) {
+      rawNotif = {
+        title: aiData.notification.title,
+        text: aiData.notification.text,
+        type: 'info',
+        icon: <Info size={16}/>,
+        color: 'var(--accent-cyan)'
+      };
+    }
+
+    const showTimer = setTimeout(() => {
+      if (rawNotif && (!notifRef.current || notifRef.current.text !== rawNotif.text)) {
+        setIsFadingOut(false);
+        setActiveNotification(rawNotif);
+        notifRef.current = rawNotif;
+
+        setTimeout(() => {
+          setIsFadingOut(true);
+          setTimeout(() => {
+            setActiveNotification(null);
+            notifRef.current = null;
+            setIsFadingOut(false);
+          }, 300);
+        }, 4000);
+      }
+    }, 600);
+
+    return () => clearTimeout(showTimer);
+  }, [aiData, context.aiEnabled]);
+
   // Auto-calculate the safest destination
   const safestZone = Object.keys(zones).reduce((a, b) => zones[a] < zones[b] ? a : b);
+
+  const handleQRScan = () => {
+    if (!context.aiEnabled) return;
+    const locs = ['Gate A', 'Gate C', 'Main Stage', 'Food Court'];
+    const nextLoc = locs[(locs.indexOf(userLocation) + 1) % locs.length];
+    
+    updateContext('userLocation', nextLoc);
+    
+    const density = zones[nextLoc];
+    let instruction = "Enjoy the event safely.";
+    let type = "info";
+    let color = "var(--accent-cyan)";
+    
+    if (density > 75) {
+      instruction = `High crowd detected. Move to ${safestZone} for a safer route.`;
+      type = "urgent";
+      color = "var(--accent-red)";
+    } else if (density > 40) {
+      instruction = "Moderate crowd. Keep moving to prevent bottlenecks.";
+    }
+
+    const qrNotif = {
+      title: 'QR Scan Synced',
+      text: `You are at ${nextLoc}. ${instruction}`,
+      type: type,
+      icon: <QrCode size={16}/>,
+      color: color
+    };
+
+    setIsFadingOut(false);
+    setActiveNotification(qrNotif);
+    notifRef.current = qrNotif;
+
+    setTimeout(() => {
+      setIsFadingOut(true);
+      setTimeout(() => {
+        setActiveNotification(null);
+        notifRef.current = null;
+        setIsFadingOut(false);
+      }, 300);
+    }, 4500);
+  };
 
   const handleChat = async () => {
     if (!chatText.trim()) return;
@@ -28,23 +120,13 @@ const UserApp = ({ context, aiData, updateContext }) => {
       <div className="mobile-frame">
         <div className="notch"></div>
         
-        {/* Urgent Push Notification Overlay */}
-        {aiData?.safetyAlert && context.aiEnabled && (
-          <div className="push-notification urgent">
-            <h4 style={{display:'flex', alignItems:'center', gap:'0.5rem', margin:0, color:'#ff4b2b'}}>
-              <ShieldAlert size={16}/> Safety Alert
+        {/* Smart Debounced Notification Overlay */}
+        {activeNotification && (
+          <div className={`push-notification ${activeNotification.type} ${isFadingOut ? 'fade-out' : ''}`}>
+            <h4 style={{display:'flex', alignItems:'center', gap:'0.5rem', margin:0, color: activeNotification.color}}>
+              {activeNotification.icon} {activeNotification.title}
             </h4>
-            <p>{aiData.safetyAlert.text}</p>
-          </div>
-        )}
-
-        {/* Smart Background Notification Overlay */}
-        {aiData?.notification && !aiData?.safetyAlert && context.aiEnabled && (
-          <div className="push-notification" style={{top: '5rem'}}>
-            <h4 style={{display:'flex', alignItems:'center', gap:'0.5rem', margin:0, color:'var(--accent-cyan)'}}>
-              <Info size={16}/> {aiData.notification.title}
-            </h4>
-            <p>{aiData.notification.text}</p>
+            <p>{activeNotification.text}</p>
           </div>
         )}
 
@@ -62,8 +144,8 @@ const UserApp = ({ context, aiData, updateContext }) => {
         </div>
 
         <div className="app-content">
-          <div className="widget" style={{background: 'var(--bg-widget)', borderColor: 'var(--widget-border)'}}>
-            <h3 className="widget-title" style={{color: 'var(--accent-cyan)'}}>Decision Engine <br/><span style={{fontSize:'0.6rem', color:'var(--text-secondary)'}}>What should I do now?</span></h3>
+          <div className={`widget ${context.aiEnabled ? 'ai-active-glow' : ''}`} style={{background: 'var(--bg-widget)', borderColor: 'var(--widget-border)', transition: 'all 0.3s ease'}}>
+            <h3 className="widget-title" style={{color: 'var(--accent-cyan)'}}>Decision Engine <br/><span style={{fontSize:'0.6rem', color:'var(--text-secondary)', fontWeight:'normal'}}>What should I do now?</span></h3>
             
             {context.aiEnabled && (
               <p style={{fontSize:'0.85rem', color:'var(--text-secondary)', marginBottom:'0.5rem', display:'flex', alignItems:'center', gap:'0.25rem'}}>
@@ -91,7 +173,7 @@ const UserApp = ({ context, aiData, updateContext }) => {
             )}
 
             {!showRoute ? (
-              <button className="actionable-btn" onClick={() => setShowRoute(true)}>View Safe Route</button>
+              <button className="actionable-btn" style={{padding: '1rem', fontSize: '1.1rem', boxShadow: '0 8px 25px rgba(0, 210, 255, 0.4)'}} onClick={() => setShowRoute(true)}>View Safe Route</button>
             ) : (
               <div style={{marginTop: '1rem', padding: '1rem', background: 'rgba(0,255,100,0.05)', borderRadius: '8px', border: '1px solid rgba(0,255,100,0.3)'}}>
                  <h4 style={{margin:0, color:'var(--accent-green)', display:'flex', alignItems:'center', gap:'0.5rem'}}><Route size={16}/> Active Safe Route</h4>
@@ -110,8 +192,16 @@ const UserApp = ({ context, aiData, updateContext }) => {
           </div>
 
           <div className="widget" style={{background: 'var(--bg-panel)'}}>
-            <h3 className="widget-title" style={{color:'var(--text-secondary)'}}>User Simulator Input</h3>
-            <div style={{display:'flex', gap:'0.5rem', marginTop:'0.5rem'}}>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+              <h3 className="widget-title" style={{color:'var(--text-secondary)', margin:0}}>User Simulator Input</h3>
+              <button 
+                onClick={handleQRScan}
+                style={{display:'flex', alignItems:'center', gap:'0.25rem', background:'var(--accent-cyan)', color:'#000', border:'none', padding:'4px 8px', borderRadius:'4px', fontSize:'0.7rem', fontWeight:'bold', cursor:'pointer'}}
+              >
+                <QrCode size={12}/> SCAN QR
+              </button>
+            </div>
+            <div style={{display:'flex', gap:'0.5rem', marginTop:'0.75rem'}}>
               <select 
                 value={context.userLocation} 
                 onChange={(e) => updateContext('userLocation', e.target.value)}
