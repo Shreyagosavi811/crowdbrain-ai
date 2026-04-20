@@ -1,88 +1,137 @@
-🚀 CrowdBrain AI
+# 🚀 CrowdBrain AI  
+**Real-Time Crowd Experience Assistant for Large-Scale Events**
 
-Real-Time Crowd Experience Assistant for Large-Scale Events
+---
 
-🧠 Overview
+## 🧠 Overview  
+CrowdBrain AI is an intelligent crowd management system designed to improve safety, reduce waiting time, and enhance attendee experience at large-scale events such as concerts, stadiums, festivals, and public gatherings.
 
-CrowdBrain AI is an intelligent, real-time crowd management system designed to improve safety, reduce waiting time, and enhance attendee experience at large-scale events like concerts, stadiums, festivals, and religious gatherings.
+It not only monitors crowd conditions but actively **guides users using AI-powered decisions**.
 
-It goes beyond monitoring — it actively guides users using AI-powered decisions.
+---
 
-🎯 Problem Statement
+## 🎯 Problem Statement  
+Large-scale events often face:
+- Overcrowded entry/exit points  
+- Long waiting queues  
+- Lack of real-time navigation  
+- Delayed manual intervention  
 
-Crowd management at large events often suffers from:
+This leads to inefficiency and potential safety risks.
 
-Overcrowded entry/exit points
-Long waiting times
-Lack of real-time guidance
-Delayed human intervention
+---
 
-This can lead to confusion, inefficiency, and even safety risks.
+## 💡 Solution  
 
-💡 Solution
+### 🔹 Master Brain (Admin Panel)
+- Monitors crowd density  
+- Detects congestion  
+- Generates real-time routing strategies  
 
-CrowdBrain AI introduces a dual-interface system:
+### 🔹 User App (Attendee Interface)
+- Provides personalized navigation  
+- Suggests safer & faster routes  
+- Sends real-time alerts  
 
-🔹 Master Brain (Admin Panel)
-Monitors real-time crowd density
-Detects high-risk zones
-Automatically generates crowd control strategies
-🔹 User App (Attendee Interface)
-Provides live navigation guidance
-Suggests optimal routes
-Sends safety alerts based on location
-🔥 Key Features
-📊 Real-Time Crowd Simulation
+---
 
-Dynamic crowd density updates across zones using live simulation logic.
+## 🔥 Key Features  
 
-🤖 AI Decision Engine
-Predicts congestion before it peaks
-Suggests alternate routes
-Explains decisions with reasoning
-📍 QR-Based Location System (Core Innovation)
-QR codes placed at event zones
-Users scan QR to instantly update their location
-AI provides context-aware, real-time guidance
-🚨 Smart Safety Alerts
-High-risk detection (🔴 / 🟡 / 🟢)
-Instant alerts with actionable instructions
-🎭 Dual Mode System
-Presentation Mode (Demo scenarios like concerts, IPL, etc.)
-Live Operations Mode (Real-time simulation dashboard)
-🏗️ Tech Stack
-Frontend
-React (Vite)
-Custom CSS (Glassmorphism UI)
-Lucide Icons
-AI & Logic
-Custom Prompt Engineering System
-Groq (Llama3) for ultra-fast inference
-Simulation
-Real-time state updates using setInterval
+- 📊 Real-Time Crowd Simulation  
+- 🤖 AI Decision Engine  
+- 📍 QR-Based Location Detection  
+- 🚨 Smart Safety Alerts (🔴 🟡 🟢)  
+- 🎭 Dual Mode (Demo + Live Operations)  
+
+---
+
+## 🏗️ Tech Stack  
+
+**Frontend**
+- React (Vite)  
+- Custom CSS (Glassmorphism UI)  
+
+**AI Engine**
+- Prompt Engineering System  
+- Groq (Llama3)  
+
+---
+
+## 🔐 Security  
+
+API keys are managed using environment variables.
+
+### Backend Proxy Example
+
+import express from "express";
+import fetch from "node-fetch";
+
+const app = express();
+app.use(express.json());
+
+app.post("/api/ai", async (req, res) => {
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(req.body)
+  });
+
+  const data = await response.json();
+  res.json(data);
+});
+
+app.listen(3001);
+
+---
+.env
+GROQ_API_KEY=your_api_key_here
 🧪 Testing
 
-Basic unit tests are included for AI response validation.
+Basic unit test for AI engine:
+
+import { describe, it, expect } from "vitest";
+import { generateAIResponses } from "../src/PromptEngine";
+
+describe("AI Engine", () => {
+  it("returns structured output", () => {
+    const context = {
+      zones: { "Gate A": 90, "Gate C": 20 },
+      userLocation: "Gate A"
+    };
+
+    const result = generateAIResponses(context);
+
+    expect(result).toHaveProperty("mainSuggestion");
+    expect(result).toHaveProperty("reasoning");
+  });
+});
+
+Run:
 
 npm run test
-🔐 Security Note
+♿ Accessibility
+Semantic HTML
+ARIA labels for UI controls
 
-⚠️ API keys are stored using environment variables.
+Example:
 
-For production:
+<button aria-label="Toggle Theme">🌙</button>
+⚡ Performance
+Optimized re-renders using React hooks
 
-AI requests will be routed through a secure backend
-No sensitive keys will be exposed on the client side
-☁️ Google Technologies (Planned Integration)
+Example:
 
-This project is designed to scale with Google ecosystem tools:
-
-Firebase (Real-time database & notifications)
-Google Maps API (Live spatial heatmaps)
-WebSockets / Cloud Functions for real-time updates
+const aiResult = useMemo(() => generateAIResponses(context), [context]);
+☁️ Google Technologies (Planned)
+Firebase (real-time sync)
+Google Maps API (crowd heatmaps)
+Cloud Functions
 🎬 Demo
-Live Preview
 
+Live App:
 👉[ https://your-live-link.vercel.app](https://crowdbrainai.vercel.app/)
 
 GitHub Repository
@@ -95,24 +144,21 @@ GitHub Repository
 <img width="1365" height="767" alt="Screenshot 2026-04-20 183745" src="https://github.com/user-attachments/assets/ecd92720-bf5f-4e64-9464-d3b7b5f2ef8f" />
 <img width="1365" height="767" alt="Screenshot 2026-04-20 183950" src="https://github.com/user-attachments/assets/c63bd589-7390-49d6-b85f-acdaad55943a" />
 
-
-
 🚀 Future Scope
-Integration with CCTV + Computer Vision for real crowd detection
+Computer Vision for real crowd detection
 Mobile app (React Native)
-Real-time push notifications via Firebase
-Smart heatmaps using Mapbox / Google Maps
+Real-time notifications
+WebSocket backend
 🏆 Built For
 
 PromptWars Virtual Hackathon
 
-#BuildWithAI
-#PromptWarsVirtual
-Built using Google Antigravity
+#BuildwithAI #PromptWarsVirtual #Antigravity
+
 👩‍💻 Author
 
 Shreya Gosavi
 
 💬 Feedback
 
-Open to feedback, suggestions, and collaboration!
+Open to feedback and suggestions.
