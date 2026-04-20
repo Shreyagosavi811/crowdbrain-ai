@@ -1,228 +1,118 @@
-# 🧠 CrowdBrain AI
+🚀 CrowdBrain AI
 
-### Intelligent Crowd Experience Assistant for Large-Scale Events
+Real-Time Crowd Experience Assistant for Large-Scale Events
 
----
+🧠 Overview
 
-##  Overview
+CrowdBrain AI is an intelligent, real-time crowd management system designed to improve safety, reduce waiting time, and enhance attendee experience at large-scale events like concerts, stadiums, festivals, and religious gatherings.
 
-CrowdBrain AI is an intelligent, real-time crowd management system designed to improve physical event experiences at large-scale venues like stadiums, concerts, festivals, and public gatherings.
+It goes beyond monitoring — it actively guides users using AI-powered decisions.
 
-It predicts crowd movement, reduces waiting time, and ensures safety by delivering AI-powered, personalized guidance directly to attendees.
----
+🎯 Problem Statement
 
-##  Problem Statement
+Crowd management at large events often suffers from:
 
-Large-scale events in India face major challenges:
+Overcrowded entry/exit points
+Long waiting times
+Lack of real-time guidance
+Delayed human intervention
 
-* Unstructured crowd movement
-* Long waiting times at food stalls and exits
-* Sudden crowd surges during peak moments
-* Lack of real-time guidance for attendees
-* Safety risks due to overcrowding
+This can lead to confusion, inefficiency, and even safety risks.
 
-Existing solutions fail to adapt to **dynamic and behavior-driven crowd patterns**.
+💡 Solution
 
----
+CrowdBrain AI introduces a dual-interface system:
 
-##  Solution
+🔹 Master Brain (Admin Panel)
+Monitors real-time crowd density
+Detects high-risk zones
+Automatically generates crowd control strategies
+🔹 User App (Attendee Interface)
+Provides live navigation guidance
+Suggests optimal routes
+Sends safety alerts based on location
+🔥 Key Features
+📊 Real-Time Crowd Simulation
 
-CrowdBrain AI provides a **dual-interface intelligent system**:
+Dynamic crowd density updates across zones using live simulation logic.
 
+🤖 AI Decision Engine
+Predicts congestion before it peaks
+Suggests alternate routes
+Explains decisions with reasoning
+📍 QR-Based Location System (Core Innovation)
+QR codes placed at event zones
+Users scan QR to instantly update their location
+AI provides context-aware, real-time guidance
+🚨 Smart Safety Alerts
+High-risk detection (🔴 / 🟡 / 🟢)
+Instant alerts with actionable instructions
+🎭 Dual Mode System
+Presentation Mode (Demo scenarios like concerts, IPL, etc.)
+Live Operations Mode (Real-time simulation dashboard)
+🏗️ Tech Stack
+Frontend
+React (Vite)
+Custom CSS (Glassmorphism UI)
+Lucide Icons
+AI & Logic
+Custom Prompt Engineering System
+Groq (Llama3) for ultra-fast inference
+Simulation
+Real-time state updates using setInterval
+🧪 Testing
 
- 1. Master Brain (Control Panel)
-Monitors crowd density across zones
-Predicts congestion hotspots
-Generates AI decisions in real-time
-Dispatches smart alerts
+Basic unit tests are included for AI response validation.
 
- 2. User App (Attendee Side)
-Receives personalized recommendations
-Gets real-time alerts & safe routes
-Reduces wait time and avoids crowd
----
+npm run test
+🔐 Security Note
 
-##  Key Features
+⚠️ API keys are stored using environment variables.
 
-### Core AI Engines
+For production:
 
-* **Decision Engine** – “What should I do now?”
-* **Prediction Engine** – Forecasts crowd surges
-* **Timing Engine** – Suggests optimal timing for actions
+AI requests will be routed through a secure backend
+No sensitive keys will be exposed on the client side
+☁️ Google Technologies (Planned Integration)
 
-###  Experience Layer
+This project is designed to scale with Google ecosystem tools:
 
-* **Personalization Engine** – Tailored recommendations
-* **AI Chat Assistant** – Interactive guidance system
-* **Smart Notification System** – Proactive alerts
+Firebase (Real-time database & notifications)
+Google Maps API (Live spatial heatmaps)
+WebSockets / Cloud Functions for real-time updates
+🎬 Demo
+Live Preview
 
-###  Safety Layer
+👉[ https://your-live-link.vercel.app](https://crowdbrainai.vercel.app/)
 
-* **Risk Detection System** – Identifies high-risk zones
-* **Alert System** – Sends real-time safety warnings
+GitHub Repository
 
-###  Demo & Simulation
+👉 [https://github.com/your-username/crowdbrain-ai](https://github.com/Shreyagosavi811/crowdbrain-ai)
 
-* Scenario-based simulation:
+📸 Screenshots
 
-  * Concert crowd surge
-  * Stadium exit rush
-  * Festival food court congestion
-* Before/After AI comparison
-* Live impact metrics (wait time reduction, congestion reduction)
+<img width="1365" height="767" alt="Screenshot 2026-04-20 183408" src="https://github.com/user-attachments/assets/69b7a078-daae-474b-a271-c0d1ebfc4000" />
+<img width="1365" height="767" alt="Screenshot 2026-04-20 183745" src="https://github.com/user-attachments/assets/ecd92720-bf5f-4e64-9464-d3b7b5f2ef8f" />
+<img width="1365" height="767" alt="Screenshot 2026-04-20 183950" src="https://github.com/user-attachments/assets/c63bd589-7390-49d6-b85f-acdaad55943a" />
 
-*  QR-Based Real-World Integration
-Scan QR at any zone
-Instantly get location-based guidance
 
----
 
-## 🇮🇳 Indian Event Scenarios
+🚀 Future Scope
+Integration with CCTV + Computer Vision for real crowd detection
+Mobile app (React Native)
+Real-time push notifications via Firebase
+Smart heatmaps using Mapbox / Google Maps
+🏆 Built For
 
-*  Concert Crowd (Entry Surge)
-*  Stadium Exit (Mass Exit)
-*  Festival / Mela Crowd
-*  Ganpati Visarjan
-*  Railway Station Rush
+PromptWars Virtual Hackathon
 
----
+#BuildWithAI
+#PromptWarsVirtual
+Built using Google Antigravity
+👩‍💻 Author
 
-##🧠 AI & Prompt Engineering
+Shreya Gosavi
 
-This system uses a Multi-Agent Prompt Architecture:
+💬 Feedback
 
-* 1. Location Agent (QR-Based)
-Detects user zone
-Updates context
-* 2. Master Brain Agent
-Analyzes crowd density
-Predicts movement
-Generates routing strategy
-* 3. User Guidance Agent
-Provides:
-Action
-Reason
-Impact
-* 4. Notification Agent
-Generates short, actionable alerts
----
-
-##  Tech Stack
-
-### Frontend
-
-* React (Vite)
-* CSS (Glassmorphism UI)
-
-### AI Layer
-
-* Groq API (LLaMA models)
-
-### Backend / Services
-
-* Firebase (optional for notifications)
-
-### Simulation
-
-* Custom event simulation using `setInterval`
-
----
-
-##  How It Works
-
-1. Event conditions are simulated (crowd density, event phase)
-2. AI analyzes real-time data
-3. Predicts future crowd behavior
-4. Generates recommendations
-5. Sends alerts to users
-6. Displays optimized routes and actions
-
----
-Demo Flow
-Start with normal crowd state
-Trigger scenario (e.g., IPL Exit / Ganpati Visarjan)
-Watch:
-Crowd spike
-AI detection
-User notification
-Observe:
-Reduced wait time
-Safer routing
-
-Live Demo : https://crowdbrain-o2lxl68vj-shreya-gosavis-projects.vercel.app/
----
-
-##  Impact
-
-*  Up to **40% reduction in waiting time**
-*  Improved crowd movement efficiency
-*  Enhanced safety through early alerts
-*  Seamless user experience
-
----
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/crowdbrain-ai.git
-cd crowdbrain-ai
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Add environment variables
-
-Create a `.env` file:
-
-```env
-VITE_GROQ_API_KEY=your_api_key_here
-```
-
-### 4. Run the app
-
-```bash
-npm run dev
-```
-
----
-
-##  Deployment
-
-Deploy easily using:
-
-* Vercel
-* Netlify
-
----
-
-##  Future Scope
-
-* Real-time IoT sensor integration
-* CCTV-based crowd detection
-* Government disaster management integration
-* Mobile app deployment
-
----
-
-##  Why CrowdBrain AI?
-
-* Real-time AI decision-making
-* Proactive notification system
-* Indian event-focused solution
-* Scalable architecture
-* High-impact user experience
-
-
----
-
-##  License
-
-This project is for hackathon/demo purposes.
-
-“CrowdBrain AI doesn’t just monitor crowds — it intelligently guides them.”
+Open to feedback, suggestions, and collaboration!
