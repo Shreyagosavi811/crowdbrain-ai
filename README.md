@@ -11,7 +11,7 @@ CrowdBrain AI is an intelligent, real-time crowd management system designed to i
 It predicts crowd movement, reduces waiting time, and ensures safety by delivering AI-powered, personalized guidance directly to attendees.
 ---
 
-## 🎯 Problem Statement
+##  Problem Statement
 
 Large-scale events in India face major challenges:
 
@@ -25,32 +25,32 @@ Existing solutions fail to adapt to **dynamic and behavior-driven crowd patterns
 
 ---
 
-## 💡 Solution
+##  Solution
 
 CrowdBrain AI provides a **dual-interface intelligent system**:
 
-CrowdBrain AI introduces a Dual-System Architecture:
 
-🔹 1. Master Brain (Control Panel)
+ 1. Master Brain (Control Panel)
 Monitors crowd density across zones
 Predicts congestion hotspots
 Generates AI decisions in real-time
 Dispatches smart alerts
-🔹 2. User App (Attendee Side)
+
+ 2. User App (Attendee Side)
 Receives personalized recommendations
 Gets real-time alerts & safe routes
 Reduces wait time and avoids crowd
 ---
 
-## 🧠 Key Features
+##  Key Features
 
-### 🔹 Core AI Engines
+### Core AI Engines
 
 * **Decision Engine** – “What should I do now?”
 * **Prediction Engine** – Forecasts crowd surges
 * **Timing Engine** – Suggests optimal timing for actions
 
-### 🔹 Experience Layer
+###  Experience Layer
 
 * **Personalization Engine** – Tailored recommendations
 * **AI Chat Assistant** – Interactive guidance system
@@ -61,7 +61,7 @@ Reduces wait time and avoids crowd
 * **Risk Detection System** – Identifies high-risk zones
 * **Alert System** – Sends real-time safety warnings
 
-### 🔹 Demo & Simulation
+###  Demo & Simulation
 
 * Scenario-based simulation:
 
@@ -79,11 +79,11 @@ Instantly get location-based guidance
 
 ## 🇮🇳 Indian Event Scenarios
 
-* 🎶 Concert Crowd (Entry Surge)
-* 🏏 Stadium Exit (Mass Exit)
-* 🎇 Festival / Mela Crowd
-* 🛕 Ganpati Visarjan
-* 🚆 Railway Station Rush
+*  Concert Crowd (Entry Surge)
+*  Stadium Exit (Mass Exit)
+*  Festival / Mela Crowd
+*  Ganpati Visarjan
+*  Railway Station Rush
 
 ---
 
@@ -107,7 +107,7 @@ Impact
 Generates short, actionable alerts
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -128,7 +128,7 @@ Generates short, actionable alerts
 
 ---
 
-## 🎬 How It Works
+##  How It Works
 
 1. Event conditions are simulated (crowd density, event phase)
 2. AI analyzes real-time data
@@ -137,12 +137,11 @@ Generates short, actionable alerts
 5. Sends alerts to users
 6. Displays optimized routes and actions
 
-   graph TD
+  graph TD
     A[Simulation / Sensors] --> B[App State]
     B --> C[AI Prompt Engine]
     C --> D[User App]
     C --> E[Admin Dashboard]
-
 ---
 Demo Flow
 Start with normal crowd state
