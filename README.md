@@ -4,12 +4,11 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
-**CrowdBrain AI** is a real-time, AI-powered crowd intelligence system designed to improve safety, reduce congestion, and enhance user experience at large-scale Indian events such as concerts, festivals, stadiums, and public gatherings.
+CrowdBrain AI is an intelligent, real-time crowd management system designed to improve physical event experiences at large-scale venues like stadiums, concerts, festivals, and public gatherings.
 
-Unlike traditional systems that rely on static data, CrowdBrain AI uses **behavior-aware intelligence**, **predictive simulation**, and **real-time decision-making** to guide users dynamically—even when they are not actively using the application.
-
+It predicts crowd movement, reduces waiting time, and ensures safety by delivering AI-powered, personalized guidance directly to attendees.
 ---
 
 ## 🎯 Problem Statement
@@ -30,20 +29,17 @@ Existing solutions fail to adapt to **dynamic and behavior-driven crowd patterns
 
 CrowdBrain AI provides a **dual-interface intelligent system**:
 
-### 🖥️ 1. Master Brain (Admin Panel)
+CrowdBrain AI introduces a Dual-System Architecture:
 
-* Simulates event conditions
-* Controls crowd density and event phases
-* Visualizes real-time crowd flow
-* Displays AI predictions and decisions
-
-### 📱 2. User App (Attendee View)
-
-* Provides real-time recommendations
-* Sends proactive notifications
-* Suggests safest routes and optimal actions
-* Personalized experience based on user behavior
-
+🔹 1. Master Brain (Control Panel)
+Monitors crowd density across zones
+Predicts congestion hotspots
+Generates AI decisions in real-time
+Dispatches smart alerts
+🔹 2. User App (Attendee Side)
+Receives personalized recommendations
+Gets real-time alerts & safe routes
+Reduces wait time and avoids crowd
 ---
 
 ## 🧠 Key Features
@@ -75,6 +71,10 @@ CrowdBrain AI provides a **dual-interface intelligent system**:
 * Before/After AI comparison
 * Live impact metrics (wait time reduction, congestion reduction)
 
+*  QR-Based Real-World Integration
+Scan QR at any zone
+Instantly get location-based guidance
+
 ---
 
 ## 🇮🇳 Indian Event Scenarios
@@ -87,23 +87,24 @@ CrowdBrain AI provides a **dual-interface intelligent system**:
 
 ---
 
-## 🧠 AI Capabilities
+##🧠 AI & Prompt Engineering
 
-* Real-time crowd prediction
-* Behavior-aware recommendations
-* Risk classification (Low / Medium / High)
-* Confidence scoring
-* Explainable AI (reasoning behind decisions)
+This system uses a Multi-Agent Prompt Architecture:
 
----
-
-## 🔔 Smart Notification System
-
-* Safety alerts (high crowd zones)
-* Timing recommendations
-* Queue optimization alerts
-* Exit optimization guidance
-
+1. Location Agent (QR-Based)
+Detects user zone
+Updates context
+2. Master Brain Agent
+Analyzes crowd density
+Predicts movement
+Generates routing strategy
+3. User Guidance Agent
+Provides:
+Action
+Reason
+Impact
+4. Notification Agent
+Generates short, actionable alerts
 ---
 
 ## 🛠️ Tech Stack
@@ -136,6 +137,25 @@ CrowdBrain AI provides a **dual-interface intelligent system**:
 5. Sends alerts to users
 6. Displays optimized routes and actions
 
+   graph TD
+    A[Simulation / Sensors] --> B[App State]
+    B --> C[AI Prompt Engine]
+    C --> D[User App]
+    C --> E[Admin Dashboard]
+
+---
+Demo Flow
+Start with normal crowd state
+Trigger scenario (e.g., IPL Exit / Ganpati Visarjan)
+Watch:
+Crowd spike
+AI detection
+User notification
+Observe:
+Reduced wait time
+Safer routing
+
+Live Demo : https://crowdbrain-o2lxl68vj-shreya-gosavis-projects.vercel.app/
 ---
 
 ## 📊 Impact
@@ -210,3 +230,5 @@ Deploy easily using:
 ## 📄 License
 
 This project is for hackathon/demo purposes.
+
+“CrowdBrain AI doesn’t just monitor crowds — it intelligently guides them.”
