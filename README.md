@@ -56,7 +56,7 @@ Reduces wait time and avoids crowd
 * **AI Chat Assistant** – Interactive guidance system
 * **Smart Notification System** – Proactive alerts
 
-### 🔹 Safety Layer
+###  Safety Layer
 
 * **Risk Detection System** – Identifies high-risk zones
 * **Alert System** – Sends real-time safety warnings
@@ -91,19 +91,19 @@ Instantly get location-based guidance
 
 This system uses a Multi-Agent Prompt Architecture:
 
-1. Location Agent (QR-Based)
+* 1. Location Agent (QR-Based)
 Detects user zone
 Updates context
-2. Master Brain Agent
+* 2. Master Brain Agent
 Analyzes crowd density
 Predicts movement
 Generates routing strategy
-3. User Guidance Agent
+* 3. User Guidance Agent
 Provides:
 Action
 Reason
 Impact
-4. Notification Agent
+* 4. Notification Agent
 Generates short, actionable alerts
 ---
 
@@ -137,11 +137,6 @@ Generates short, actionable alerts
 5. Sends alerts to users
 6. Displays optimized routes and actions
 
-  graph TD
-    A[Simulation / Sensors] --> B[App State]
-    B --> C[AI Prompt Engine]
-    C --> D[User App]
-    C --> E[Admin Dashboard]
 ---
 Demo Flow
 Start with normal crowd state
@@ -157,16 +152,16 @@ Safer routing
 Live Demo : https://crowdbrain-o2lxl68vj-shreya-gosavis-projects.vercel.app/
 ---
 
-## 📊 Impact
+##  Impact
 
-* ⏳ Up to **40% reduction in waiting time**
-* 🚶 Improved crowd movement efficiency
-* ⚠️ Enhanced safety through early alerts
-* 📱 Seamless user experience
+*  Up to **40% reduction in waiting time**
+*  Improved crowd movement efficiency
+*  Enhanced safety through early alerts
+*  Seamless user experience
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the repository
 
@@ -197,7 +192,7 @@ npm run dev
 
 ---
 
-## 🌐 Deployment
+##  Deployment
 
 Deploy easily using:
 
@@ -206,7 +201,7 @@ Deploy easily using:
 
 ---
 
-## 🔮 Future Scope
+##  Future Scope
 
 * Real-time IoT sensor integration
 * CCTV-based crowd detection
@@ -215,7 +210,7 @@ Deploy easily using:
 
 ---
 
-## 🏆 Why CrowdBrain AI?
+##  Why CrowdBrain AI?
 
 * Real-time AI decision-making
 * Proactive notification system
@@ -226,7 +221,7 @@ Deploy easily using:
 
 ---
 
-## 📄 License
+##  License
 
 This project is for hackathon/demo purposes.
 
