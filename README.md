@@ -88,6 +88,7 @@ app.listen(3001);
 ---
 .env
 GROQ_API_KEY=your_api_key_here
+
 🧪 Testing
 
 Basic unit test for AI engine:
@@ -108,6 +109,8 @@ describe("AI Engine", () => {
     expect(result).toHaveProperty("reasoning");
   });
 });
+
+---
 
 Run:
 
